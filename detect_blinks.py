@@ -60,7 +60,6 @@ def main():
     # the facial landmark predictor
     print("[INFO] loading facial landmark predictor...")
     detector = dlib.get_frontal_face_detector()
-    #predictor = dlib.shape_predictor(args["shape_predictor"])
     predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
     # grab the indexes of the facial landmarks for the left and
@@ -129,18 +128,23 @@ def main():
             # threshold, and if so, increment the blink frame counter
             if ear < EYE_AR_THRESH:
                 COUNTER += 1
+                # Checking if it is not first frame where eyes are closed
+                # for understanding can we start checking time of closed eyes
                 if COUNTER > 1:
+                    # If eyes are closed more than 2 seconds
                     if time.time() - closedEyes > 2:
+                        # If eyes are closed more than 2 second
+                        # than will appear red text "Alert"
                         cv2.putText(frame, "Alert", (200, 30),
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
                 else:
+                    # if it is first frame where eyes are closed
+                    # we are starting counting time of closed eyes
                     closedEyes = time.time()
 
             # otherwise, the eye aspect ratio is not below the blink
             # threshold
             else:
-
-                closedEyes = 0
 
                 # if the eyes were closed for a sufficient number of
                 # then increment the total number of blinks
