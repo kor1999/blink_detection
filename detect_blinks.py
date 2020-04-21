@@ -79,7 +79,7 @@ def main():
 
     time.sleep(1.0)
 
-    closedEyes = time.time() # time of how long eyes are closed
+    closedEyes = 0 # time of how long eyes are closed
 
     # loop over frames from the video stream
     while True:
@@ -155,8 +155,8 @@ def main():
             # the computed eye aspect ratio for the frame
             cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-            cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+            # cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
+            #             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
         # show the frame
         cv2.imshow("Frame", frame)
